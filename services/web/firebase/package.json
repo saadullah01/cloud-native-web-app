@@ -1,0 +1,16 @@
+{
+  "name": "web-firebase",
+  "version": "1.0.0",
+  "description": "The web service's Firebase project.",
+  "main": "index.js",
+  "scripts": {
+    "firebase:login": "firebase login --no-localhost",
+    "deploy": "firebase deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saad Ullah, @saadullah01",
+  "license": "ISC",
+  "devDependencies": {
+    "firebase-tools": "^9.2.2"
+  }
+}
