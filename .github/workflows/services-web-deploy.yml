@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - master
-      - add-deployment-github-action
+    paths:
+      - 'services/web/**'
 
 jobs:
   deploy:
