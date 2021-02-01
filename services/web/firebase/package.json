@@ -4,6 +4,7 @@
   "description": "The web service's Firebase project.",
   "main": "index.js",
   "scripts": {
+    "firebase:login": "firebase login --no-localhost",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Saad Ullah, @saadullah01",
