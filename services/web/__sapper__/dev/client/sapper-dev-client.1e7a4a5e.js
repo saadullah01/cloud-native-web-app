@@ -1,51 +1,49 @@
 let source;
 
 function check() {
-  if (typeof module === "undefined") return;
+	if (typeof module === 'undefined') return;
 
-  if (module.hot.status() === "idle") {
-    module.hot.check(true).then((modules) => {
-      console.log(`[SAPPER] applied HMR update`);
-    });
-  }
+	if (module.hot.status() === 'idle') {
+		module.hot.check(true).then(modules => {
+			console.log(`[SAPPER] applied HMR update`);
+		});
+	}
 }
 
 function connect(port) {
-  if (source || !window.EventSource) return;
+	if (source || !window.EventSource) return;
 
-  source = new EventSource(
-    `http://${window.location.hostname}:${port}/__sapper__`
-  );
+	source = new EventSource(`http://${window.location.hostname}:${port}/__sapper__`);
 
-  window.source = source;
+	window.source = source;
 
-  source.onopen = function (event) {
-    console.log(`[SAPPER] dev client connected`);
-  };
+	source.onopen = function(event) {
+		console.log(`[SAPPER] dev client connected`);
+	};
 
-  source.onerror = function (error) {
-    console.error(error);
-  };
+	source.onerror = function(error) {
+		console.error(error);
+	};
 
-  source.onmessage = function (event) {
-    const data = JSON.parse(event.data);
-    if (!data) return; // just a heartbeat
+	source.onmessage = function(event) {
+		const data = JSON.parse(event.data);
+		if (!data) return; // just a heartbeat
 
-    if (data.action === "reload") {
-      window.location.reload();
-    }
+		if (data.action === 'reload') {
+			window.location.reload();
+		}
 
-    if (data.status === "completed") {
-      check();
-    }
-  };
+		if (data.status === 'completed') {
+			check();
+		}
+	};
 
-  // Close the event source before the window is unloaded to prevent an error
-  // ("The connection was interrupted while the page was loading.") in Firefox
-  // when the page is reloaded.
-  window.addEventListener("beforeunload", function () {
-    source.close();
-  });
+	// Close the event source before the window is unloaded to prevent an error
+	// ("The connection was interrupted while the page was loading.") in Firefox
+	// when the page is reloaded.
+	window.addEventListener('beforeunload', function() {
+		source.close();
+	});
 }
 
 export { connect };
