@@ -8,6 +8,8 @@ import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import sveltePreprocess from "svelte-preprocess";
+import tailwindcss from "tailwindcss";
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -18,6 +20,12 @@ const onwarn = (warning, onwarn) =>
 	(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
 	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
 	onwarn(warning);
+
+const sveltePreprocessOptions = sveltePreprocess({
+  postcss: {
+    plugins: [tailwindcss],
+  },
+});
 
 export default {
 	client: {
@@ -33,6 +41,7 @@ export default {
 					dev,
 					hydratable: true
 				},
+                                preprocess: sveltePreprocessOptions,
                                 emitCss: !test
 			}),
 			url({
@@ -85,6 +94,7 @@ export default {
 					generate: 'ssr',
 					hydratable: true
 				},
+                                preprocess: sveltePreprocessOptions,
 				emitCss: false
 			}),
 			url({
