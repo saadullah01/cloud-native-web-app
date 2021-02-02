@@ -1,14 +1,13 @@
 <script context="module">
 	export async function preload({ params }) {
-		// the `slug` parameter is available because
-		// this file is called [slug].svelte
-		const res = await this.fetch(`blog/${params.slug}.json`);
-		const data = await res.json();
-
-		if (res.status === 200) {
-			return { post: data };
-		} else {
-			this.error(res.status, data.message);
+		if (typeof window !== "undefined") {
+			const doc = await
+		window.db.collection("posts").doc( params.slug).get();
+			if (doc.exists) {
+			return { post: doc.data() }
+			} else {
+			this.error(404, "No blog post found.")
+			}
 		}
 	}
 </script>
@@ -54,11 +53,15 @@
 </style>
 
 <svelte:head>
-	<title>{post.title}</title>
+  <title>{post ? post.title : ''}</title>
 </svelte:head>
 
-<h1>{post.title}</h1>
+{#if post}
+  <h1>{post.title}</h1>
 
-<div class="content">
-	{@html post.html}
-</div>
+  <div class='content'>
+    {post.content}
+  </div>
+{:else}
+  <p>Loading blog post...</p>
+{/if}
