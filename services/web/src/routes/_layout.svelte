@@ -1,6 +1,7 @@
 <script>
 	import Nav from '../components/Nav.svelte';
 	import TailwindCSS from '../components/tailwindcss.svelte';
+	import UserObserver from '../components/user-observer.svelte';
 	export let segment;
 </script>
 
@@ -14,7 +15,10 @@
 		box-sizing: border-box;
 	}
 </style>
+
+<UserObserver />
 <TailwindCSS />
+
 <Nav {segment}/>
 
 <main>
