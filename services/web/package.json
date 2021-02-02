@@ -3,8 +3,8 @@
   "description": "TODO",
   "version": "0.0.1",
   "scripts": {
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:open": "NODE_ENV=test cypress open",
+    "cy:run": "NODE_ENV=test cypress run",
     "dev": "run-p dev:*",
     "dev:firebase": "npm run dev --prefix firebase",
     "dev:sapper": "sapper dev",
