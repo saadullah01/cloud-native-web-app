@@ -1,13 +1,25 @@
 <script context="module">
 	export function preload() {
-		return this.fetch(`blog.json`).then(r => r.json()).then(posts => {
-			return { posts };
-		});
+		if (typeof window !== "undefined") {
+		return window.db
+			.collection("posts")
+			.get()
+			.then(querySnapshot => {
+			const posts = querySnapshot.docs.map(doc => ({
+				slug: doc.id,
+				...doc.data()
+			}));
+			return {
+				posts
+			};
+			});
+		}
+		return null;
 	}
 </script>
 
 <script>
-	export let posts;
+	export let posts = [];
 </script>
 
 <style>

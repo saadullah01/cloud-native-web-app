@@ -5,12 +5,10 @@ describe('Blog posts', () => {
    cy.visit('http://localhost:3000/blog')
   });
 
-  posts.forEach(post => {
-    it(`lists the "${post.title}" blog post`, () => {
-      cy
-        .contains('[data-cy=blog-posts-list] li a', post.title)
-        .should('have.attr', 'href', `blog/${post.slug}`)
-    })
+  it("displays blog posts", () => {
+    cy.get("[data-cy=blog-posts-list] li").should(
+      "not.have.length", 0
+    );
   });
 });
 
