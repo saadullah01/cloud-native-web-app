@@ -1,4 +1,4 @@
-const posts = require('../../src/routes/blog/_posts');
+import posts from "../../src/routes/blog/_posts";
 
 describe('Blog posts', () => {
   beforeEach(() => {
