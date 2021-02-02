@@ -12,7 +12,7 @@
   }
 </script>
 
-<ContactCard {...erinLindford} />
+
 
 <svelte:head>
 	<title>About</title>
