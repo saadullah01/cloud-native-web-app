@@ -1,6 +1,6 @@
 describe('Header Test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
+    cy.visit('/')
   });
 
   it('has the correct <h1>', () => {
@@ -10,7 +10,7 @@ describe('Header Test', () => {
 
 describe("Sapper template app", () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
+    cy.visit('/')
   });
 
   it("has the correct heading", () => {

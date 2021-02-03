@@ -1,5 +1,6 @@
 {
   "projectId": "58qxt1",
   "componentFolder": "cypress/components",
-  "experimentalComponentTesting": true
+  "experimentalComponentTesting": true,
+  "baseUrl": "http://localhost:3000/"
 }

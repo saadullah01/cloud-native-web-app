@@ -27,6 +27,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_ENV: test
+          FIRESTORE_EMULATOR_HOST: "localhost:8080"
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: test

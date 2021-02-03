@@ -1,6 +1,6 @@
 describe('Blog posts', () => {
   before(() => {
-    cy.visit("http://localhost:3000/").then(contentWindow => {
+    cy.visit("/").then(contentWindow => {
       const firebaseAppOptions = contentWindow.firebase.app().options;
       cy.task("addBlogPost", {
         firebaseAppOptions,
@@ -11,7 +11,7 @@ describe('Blog posts', () => {
         }
       });
     });
-    cy.visit("http://localhost:3000/blog");
+    cy.visit("/blog");
   });
 
   it("displays the test blog post", () => {
