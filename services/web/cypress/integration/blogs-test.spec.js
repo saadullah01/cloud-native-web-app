@@ -1,12 +1,21 @@
 describe('Blog posts', () => {
-  beforeEach(() => {
-   cy.visit('http://localhost:3000/blog')
+  before(() => {
+    cy.visit("http://localhost:3000/").then(contentWindow => {
+      const firebaseAppOptions = contentWindow.firebase.app().options;
+      cy.task("addBlogPost", {
+        firebaseAppOptions,
+        slug: "test-post",
+        post: {
+          content: "A test blog post",
+          title: "Test post"
+        }
+      });
+    });
+    cy.visit("http://localhost:3000/blog");
   });
 
-  it("displays blog posts", () => {
-    cy.get("[data-cy=blog-posts-list] li").should(
-      "not.have.length", 0
-    );
+  it("displays the test blog post", () => {
+    cy.contains("[data-cy=blog-posts-list] a", "Test post");
   });
 });
 
